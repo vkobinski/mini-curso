@@ -27,4 +27,11 @@ public class MensagemController {
         return "OK";
     }
 
+    @GetMapping(path = "/cria/{mensagem}")
+    public @ResponseBody String criaMensagem2(@RequestParam String mensagem) {
+        Mensagem nova_mensagem = new Mensagem(mensagem);
+        repo.save(nova_mensagem);
+        return "OK";
+    }
+
 }
