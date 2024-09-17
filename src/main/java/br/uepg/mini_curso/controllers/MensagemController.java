@@ -20,8 +20,8 @@ public class MensagemController {
         return repo.getById(id).getCorpo();
     }
 
-    @GetMapping(path = "/cria/{mensagem}")
-    public @ResponseBody String criaMensagem(@PathVariable String mensagem) {
+    @PostMapping(path = "/cria")
+    public @ResponseBody String criaMensagem(@RequestBody String mensagem) {
         Mensagem nova_mensagem = new Mensagem(mensagem);
         repo.save(nova_mensagem);
         return "OK";
