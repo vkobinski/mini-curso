@@ -15,6 +15,8 @@
 
 <button onclick="manda()">Postar</button>
 
+<h2 id="mensagem">Corpo da Mensagem</h2>
+
 </body>
 
 <script>
@@ -28,7 +30,10 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ corpo: corpo, usuario: usuario })
         };
-        fetch('http://localhost:8080/mensagem/cria', requestOptions).then(data => console.log(data));
+        fetch('http://localhost:8080/mensagem/cria', requestOptions).then(data => data.text()).then(body => {
+            console.log(body);
+            document.getElementById("mensagem").innerHTML = body;
+        });
     }
 </script>
 </html>

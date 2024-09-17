@@ -29,7 +29,7 @@ public class MensagemController {
     @PostMapping(path = "/cria", consumes = "application/json")
     public @ResponseBody String criaMensagem(@RequestBody Mensagem mensagem) {
         repo.save(mensagem);
-        return "OK";
+        return mensagem.getCorpo() + "\n" + mensagem.getUsuario();
     }
 
     @GetMapping(path = "/cria/{mensagem}")
