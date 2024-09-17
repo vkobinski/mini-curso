@@ -17,19 +17,24 @@ public class MensagemController {
 
     @GetMapping(path = "/{id}")
     public @ResponseBody String getMensagem(@PathVariable Long id) {
-        return repo.getById(id).getCorpo();
+        try {
+            Mensagem mensagem = repo.getById(id);
+
+            return mensagem.getCorpo() + "\n" + mensagem.getUsuario();
+        } catch (Exception e) {
+            return "Mensagem não encontrada";
+        }
     }
 
-    @PostMapping(path = "/cria")
-    public @ResponseBody String criaMensagem(@RequestBody String mensagem) {
-        Mensagem nova_mensagem = new Mensagem(mensagem);
-        repo.save(nova_mensagem);
+    @PostMapping(path = "/cria", consumes = "application/json")
+    public @ResponseBody String criaMensagem(@RequestBody Mensagem mensagem) {
+        repo.save(mensagem);
         return "OK";
     }
 
     @GetMapping(path = "/cria/{mensagem}")
-    public @ResponseBody String criaMensagem2(@RequestParam String mensagem) {
-        Mensagem nova_mensagem = new Mensagem(mensagem);
+    public @ResponseBody String criaMensagem2(@PathVariable String mensagem) {
+        Mensagem nova_mensagem = new Mensagem(mensagem, "");
         repo.save(nova_mensagem);
         return "OK";
     }

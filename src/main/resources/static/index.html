@@ -7,8 +7,28 @@
 <body>
 
 <h2>
-    Mini Curso
+    Rede Social
 </h2>
 
+<input id="corpo" type="text"/>
+<input id="usuario" type="text"/>
+
+<button onclick="manda()">Postar</button>
+
 </body>
+
+<script>
+
+    function manda() {
+        let corpo = document.getElementById("corpo").value;
+        let usuario = document.getElementById("usuario").value;
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ corpo: corpo, usuario: usuario })
+        };
+        fetch('http://localhost:8080/mensagem/cria', requestOptions).then(data => console.log(data));
+    }
+</script>
 </html>

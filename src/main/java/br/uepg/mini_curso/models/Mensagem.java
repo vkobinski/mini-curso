@@ -10,8 +10,9 @@ public class Mensagem {
 
     public Mensagem() {}
 
-    public Mensagem(String corpo) {
+    public Mensagem(String corpo, String usuario) {
         this.corpo = corpo;
+        this.usuario = usuario;
     }
 
     @Id
@@ -20,6 +21,17 @@ public class Mensagem {
 
     @Column
     private String corpo;
+
+    @Column
+    private String usuario;
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
     public String getCorpo() {
         return corpo;
